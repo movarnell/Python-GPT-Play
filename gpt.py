@@ -2,34 +2,23 @@ from dotenv import load_dotenv
 import openai
 import os
 
+
 load_dotenv()
-
-
-# Set the OpenAI API key
-# apiKey = os.getenv("OPENAI_API_KEY")
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 openai.api_key = OPENAI_API_KEY
 
 
-
-
-# prompt the user for input
-
 def main():
-    # Set the OpenAI API key
-    # openai.api_key = apiKey
-
-
 
     print("Welcome to the GPT-3 text generation program.")
-    print("Enter a prompt to generate text based on that prompt.")
-    print("Enter 'exit' to exit the program.")
+    print("Enter 'exit' if you decide you want to exit the program.")
+    print("Enter a prompt just as you would on the web interface.")
 
     chat_history = [];
 
     while True:
-        prompt = input("Enter a prompt: ")
+        prompt = input("\nENTER PROMPT HERE: ")
         if prompt == 'exit':
             break
 
@@ -39,7 +28,7 @@ def main():
             completion = openai.chat.completions.create(
                 model="gpt-3.5-turbo-0125",
                 messages=chat_history,
-                max_tokens=400
+                max_tokens=150
         )
             chat_history.append({"role": "assistant", "content": completion.choices[0].message.content});
             print(completion.choices[0].message.content)
